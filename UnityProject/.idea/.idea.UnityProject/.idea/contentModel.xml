@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\paulqu\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\paulqu\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityProject.1606874046.00" t="ExcludeRecursive" />
+    <e p="E:\projects\github\UnityChain\UnityProject" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets\Scripts" t="Include">
+        <e p="Runtime" t="Include">
+          <e p="Collider" t="Include">
+            <e p="ChainCollider.cs" t="Include" />
+            <e p="CubeColliderHelper.cs" t="Include" />
+            <e p="CubeVertexs.cs" t="Include" />
+          </e>
+          <e p="Core" t="Include">
+            <e p="Chain.cs" t="Include" />
+            <e p="ChainError.cs" t="Include" />
+            <e p="EParticlePositionChangedEvent.cs" t="Include" />
+            <e p="Particle.cs" t="Include" />
+            <e p="UnityChainLogger.cs" t="Include" />
+            <e p="UnityChainRuntimeSetting.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+      <e p="UnityProject.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>
