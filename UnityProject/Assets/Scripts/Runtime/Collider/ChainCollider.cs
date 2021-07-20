@@ -4,7 +4,12 @@ namespace UnityChain
 {
 	public class ChainCollider : MonoBehaviour
 	{
-	    private void Start()
+        private void Start()
+        {
+            Reset();
+        }
+
+        public void Reset()
         {
             Owner = GetComponent<UnityChain.Particle>();
             m_transformCache = transform;
@@ -123,7 +128,6 @@ namespace UnityChain
 
             return Owner.LocalToWorldMatrix;
         }
-
 
         private Matrix4x4 GetWorldToLocalMatrix()
         {

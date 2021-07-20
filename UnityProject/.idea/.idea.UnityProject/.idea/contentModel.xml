@@ -14,11 +14,13 @@
           </e>
           <e p="Core" t="Include">
             <e p="Chain.cs" t="Include" />
+            <e p="Chain.Gizmos.cs" t="Include" />
+            <e p="ChainColliderGizmosFlag.cs" t="Include" />
             <e p="ChainError.cs" t="Include" />
             <e p="EParticlePositionChangedEvent.cs" t="Include" />
             <e p="Particle.cs" t="Include" />
             <e p="UnityChainLogger.cs" t="Include" />
-            <e p="UnityChainRuntimeSetting.cs" t="Include" />
+            <e p="UnityChainRuntimeDefine.cs" t="Include" />
           </e>
         </e>
       </e>

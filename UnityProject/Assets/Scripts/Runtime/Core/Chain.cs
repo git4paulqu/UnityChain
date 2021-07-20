@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UnityChain
 {
-	public class Chain : MonoBehaviour
+	public partial class Chain : MonoBehaviour
 	{
 		private void Start()
 		{
@@ -14,7 +14,7 @@ namespace UnityChain
 			
 			PrepareParticles();
 			
-			PrepareBounds();
+			PrepareColliders();
 		}
 
 		private void Update()
@@ -35,6 +35,13 @@ namespace UnityChain
 			}
 
 			UpdateChain(Time.smoothDeltaTime);
+		}
+
+		private void OnValidate()
+		{
+			particles = GetComponentsInChildren<UnityChain.Particle>();
+
+			Start();
 		}
 
 		private void PrepareParticles()
@@ -81,22 +88,28 @@ namespace UnityChain
 			return true;
 		}
 
-		private void PrepareBounds()
+		private void PrepareColliders()
 		{
 			bounds = GetComponent<ChainCollider>();
+			if (null != bounds)
+			{
+				bounds.Reset();
+			}
 
+			particleColliders.Clear();
+			
 			int count = ParticleCount;
 			for (int i = 0; i < count; i++)
 			{
 				UnityChain.Particle p = particles[i];
-				if (null == p.particleCollider)
+				if (null == p || null == p.particleCollider)
 				{
 					continue;
 				}
 				particleColliders.Add(p.particleCollider);
 			}
 		}
-		
+
 		private void UpdateParticlesRender()
 		{
 			int count = ParticleCount;
@@ -305,12 +318,12 @@ namespace UnityChain
 			}
 		}
 
-		public int iterations;
+		public int iterations = 1;
 		public ChainCollider bounds;
 		public UnityChain.Particle[] particles;
-
+		public List<ChainCollider> particleColliders = new List<ChainCollider>();
+		
 		private ChainError m_error;
 		private Transform m_transformCache;
-		private List<ChainCollider> particleColliders = new List<ChainCollider>();
 	}
 }

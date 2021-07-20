@@ -10,6 +10,11 @@ namespace UnityChain
             SetTransform();
             Reset();
             particleCollider = GetComponent<ChainCollider>();
+
+            if (null != particleCollider)
+            {
+                particleCollider.Reset();
+            }
         }
 
         public void Reset()
