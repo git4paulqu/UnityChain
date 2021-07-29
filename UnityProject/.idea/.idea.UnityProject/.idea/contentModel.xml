@@ -4,6 +4,7 @@
     <e p="C:\Users\paulqu\.Rider2018.3\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\paulqu\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_UnityProject.1606874046.00" t="ExcludeRecursive" />
     <e p="E:\projects\github\UnityChain\UnityProject" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets\Scripts" t="Include">
         <e p="Runtime" t="Include">
@@ -14,13 +15,77 @@
           </e>
           <e p="Core" t="Include">
             <e p="Chain.cs" t="Include" />
+            <e p="Chain.FrameDebugger.cs" t="Include" />
             <e p="Chain.Gizmos.cs" t="Include" />
             <e p="ChainColliderGizmosFlag.cs" t="Include" />
             <e p="ChainError.cs" t="Include" />
+            <e p="ChainScene.cs" t="Include" />
             <e p="EParticlePositionChangedEvent.cs" t="Include" />
             <e p="Particle.cs" t="Include" />
             <e p="UnityChainLogger.cs" t="Include" />
             <e p="UnityChainRuntimeDefine.cs" t="Include" />
+          </e>
+          <e p="FrameDebugger" t="Include">
+            <e p="Client" t="Include">
+              <e p="UnityChainFrameDebuggerClient.cs" t="Include" />
+              <e p="UnityChainFrameDebuggerClientProxy.cs" t="Include" />
+            </e>
+            <e p="Data" t="Include">
+              <e p="RuntimeData.cs" t="Include" />
+              <e p="RuntimeDataID.cs" t="Include" />
+              <e p="SnapshotData" t="Include">
+                <e p="ChainColliderSnapshotData.cs" t="Include" />
+                <e p="ChainSnapshotData.cs" t="Include" />
+                <e p="ParticleSnapshotData.cs" t="Include" />
+              </e>
+              <e p="SynchronousData" t="Include">
+                <e p="ChainSynchronousData.cs" t="Include" />
+                <e p="FixedUpdateSynchronousData.cs" t="Include" />
+                <e p="FixedUpdateSynchronousDataState.cs" t="Include" />
+                <e p="FrameDebuggerChainRuntimeData.cs" t="Include" />
+                <e p="FrameDebuggerChainRuntimeFrameData.cs" t="Include" />
+                <e p="FrameDebuggerRuntimeDataCollector.cs" t="Include" />
+                <e p="ParticleSynchronousData.cs" t="Include" />
+                <e p="UpdateSynchronousData.cs" t="Include" />
+              </e>
+              <e p="UnityChainFrameDebuggerServerProxy.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="EditorConnectionExample.cs" t="Include" />
+              <e p="EditorStyleViewer.cs" t="Include" />
+              <e p="GUI" t="Include">
+                <e p="UnityChainFrameDebuggerAttachProfilerUI.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerHierarchy.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerHierarchyTreeView.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerHierarchyTreeView.Data.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerInspector.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerProfiler.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerRecorder.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerServer.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerServer.Player.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerWindowGUIContext.cs" t="Include" />
+              </e>
+              <e p="Scene" t="Include">
+                <e p="UnityChainFrameDebuggerChain.cs" t="Include" />
+                <e p="UnityChainFrameDebuggerScene.cs" t="Include" />
+              </e>
+              <e p="TimelineData" t="Include">
+                <e p="FrameDebuggerChainTimelineData.cs" t="Include" />
+                <e p="FrameDebuggerTimelineData.cs" t="Include" />
+                <e p="FrameDebuggerTimelineDataCollector.cs" t="Include" />
+                <e p="FrameDebuggerTimelineDataCollectorBuffer.cs" t="Include" />
+                <e p="FrameDebuggerTimelineID.cs" t="Include" />
+                <e p="FrameDebuggerTimelineSimulater.cs" t="Include" />
+              </e>
+              <e p="UnityChainFrameDebuggerWindow.cs" t="Include" />
+              <e p="UnityChainFrameDebuggerWindow.GUI.cs" t="Include" />
+            </e>
+            <e p="Utils" t="Include">
+              <e p="ByteBuffer.cs" t="Include" />
+              <e p="UnityChainFrameDebuggerMonoer.cs" t="Include" />
+              <e p="UnityChainFrameDebuggerProtocolID.cs" t="Include" />
+              <e p="UnityChainFrameDebuggerSerializer.cs" t="Include" />
+            </e>
           </e>
         </e>
       </e>

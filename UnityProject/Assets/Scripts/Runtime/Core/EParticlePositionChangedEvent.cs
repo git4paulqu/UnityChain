@@ -7,5 +7,6 @@ namespace UnityChain
         SimulateHead,
         Constraint,
         Collision,
+        FrameDebug,
     }
 }

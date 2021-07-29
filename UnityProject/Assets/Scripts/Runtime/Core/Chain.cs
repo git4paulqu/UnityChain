@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityChain
@@ -19,6 +20,14 @@ namespace UnityChain
 
 		private void Update()
 		{
+			if (!IsWork4Update())
+			{
+				return;
+			}
+			
+			float time = Time.deltaTime;
+			WriteUpdateData(time);
+
 			if (!IsNeedUpdate())
 			{
 				return;
@@ -29,12 +38,20 @@ namespace UnityChain
 
 		private void FixedUpdate()
 		{
+			if (!IsWork4Update())
+			{
+				return;
+			}
+			
+			float time = Time.smoothDeltaTime;
+			WriteLateUpdateData(time);
+
 			if (!IsNeedUpdate())
 			{
 				return;
 			}
 
-			UpdateChain(Time.smoothDeltaTime);
+			UpdateChain(time);
 		}
 
 		private void OnValidate()
@@ -146,6 +163,13 @@ namespace UnityChain
 			{
 				Particle particle = particles[i];
 				Vector3 position = particle.Position;
+				
+				if (i == 0)
+				{
+					particle.SetPrePosition(position);
+					particle.SetPosition(m_transformCache.position, EParticlePositionChangedEvent.SimulateHead);
+					continue;
+				}
 
 				Vector3 velocity = position - particle.PrePosition;
 
@@ -166,11 +190,6 @@ namespace UnityChain
 				newPosition += particle.gravity * deltaTime;
 
 				particle.SetPosition(newPosition, EParticlePositionChangedEvent.Simulate);
-                
-				if (i == 0)
-				{
-					particle.SetPosition(m_transformCache.position, EParticlePositionChangedEvent.SimulateHead);
-				}
 			}
 		}
 		
@@ -279,6 +298,22 @@ namespace UnityChain
 				}
 			}
 		}
+		
+		private void SetError(ChainError error)
+		{
+			m_error = error;
+		}
+
+		public Particle GetParticle(int index)
+		{
+			int totalCount = ParticleCount;
+			if (index < 0 || index >= totalCount)
+			{
+				return null;
+			}
+
+			return particles[index];
+		}
 
 		private bool IsNeedUpdate()
 		{
@@ -295,17 +330,12 @@ namespace UnityChain
 			
 			return true;
 		}
-
-		private void SetError(ChainError error)
+		
+		private bool IsWork4Update()
 		{
-			m_error = error;
+			return !UnityChainRuntimeDefine.EnablFrameDebuggerReplay;
 		}
-
-		private ChainError GetError()
-		{
-			return m_error;
-		}
-
+		
 		public int ParticleCount
 		{
 			get {
@@ -318,11 +348,11 @@ namespace UnityChain
 			}
 		}
 
-		public int iterations = 1;
 		public ChainCollider bounds;
 		public UnityChain.Particle[] particles;
 		public List<ChainCollider> particleColliders = new List<ChainCollider>();
 		
+		private int iterations = 1;
 		private ChainError m_error;
 		private Transform m_transformCache;
 	}

@@ -110,6 +110,11 @@ namespace UnityChain
             }
         }
 
+        public Transform Owner
+        {
+            get { return m_transformCache; }
+        }
+
         public float velocityDampen = 0.95f;
         public float stiffness = 1f;
         public Vector3 gravity = new Vector3(0, -2, 0);
