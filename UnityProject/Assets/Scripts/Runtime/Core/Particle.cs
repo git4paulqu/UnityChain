@@ -117,6 +117,7 @@ namespace UnityChain
 
         public float velocityDampen = 0.95f;
         public float stiffness = 1f;
+        public float inert = 0f;
         public Vector3 gravity = new Vector3(0, -2, 0);
 
         public int Index { get; private set; }

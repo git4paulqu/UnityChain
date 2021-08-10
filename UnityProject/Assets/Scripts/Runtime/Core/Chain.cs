@@ -16,6 +16,8 @@ namespace UnityChain
 			PrepareParticles();
 			
 			PrepareColliders();
+			
+			PrepareState();
 		}
 
 		private void Update()
@@ -139,6 +141,8 @@ namespace UnityChain
 
 		private void UpdateChain(float deltaTime)
 		{
+			PrepareState();
+			
 			Simulate(deltaTime);
 			
 			for (int i = 0; i < iterations; i++)
@@ -149,6 +153,13 @@ namespace UnityChain
 			}
 			
 			SetAngles();
+		}
+
+		private void PrepareState()
+		{
+			Vector3 position = m_transformCache.position;
+			m_movement = position - m_prePosition;
+			m_prePosition = position;
 		}
 
 		private void Simulate(float deltaTime)
@@ -171,7 +182,9 @@ namespace UnityChain
 					continue;
 				}
 
+				Vector3 rmove = m_movement * particle.inert;
 				Vector3 velocity = position - particle.PrePosition;
+				//FixedVelocity(ref velocity);
 
 				velocity += particle.Force;
 				particle.SetForce(Vector3.zero);
@@ -183,14 +196,29 @@ namespace UnityChain
 					velocity = Vector3.zero;
 				}
 
-				particle.SetPrePosition(position);
+				Vector3 prePosition = position + rmove;
+				particle.SetPrePosition(prePosition);
                 
 				// calculate new position
-				Vector3 newPosition = position + velocity;
+				Vector3 newPosition = position + rmove + velocity;
 				newPosition += particle.gravity * deltaTime;
 
 				particle.SetPosition(newPosition, EParticlePositionChangedEvent.Simulate);
 			}
+		}
+		
+		private void FixedVelocity(ref Vector3 velocity)
+		{
+			velocity.x += velocity.y;
+			velocity.y = 0;
+
+			float x = clampVelocity.x;
+			//float y = clampVelocity.y;
+			float z = clampVelocity.z;
+
+			velocity.x = Mathf.Clamp(velocity.x, -x, x);
+			//velocity.y = Mathf.Clamp(velocity.y, -y, y);
+			velocity.z = Mathf.Clamp(velocity.z, -z, z);
 		}
 		
 		private void ApplyConstraint(int iteration = 0)
@@ -284,17 +312,23 @@ namespace UnityChain
 				return;
 			}
 
+			Vector3 right = m_transformCache.right;
+			
 			count--;
+			int p1Max = count - 1;
 			for (int i = 0; i < count; i++)
 			{
 				UnityChain.Particle p1 = particles[i];
 				UnityChain.Particle p2 = particles[i + 1];
 
-				var direction = (p1.Position - p2.Position).normalized;
-				if (i < count && direction != Vector3.zero)
+				Vector3 up = (p1.Position - p2.Position).normalized;
+				Vector3 forwad = Vector3.Cross(right, up);
+				Quaternion quaternion = Quaternion.LookRotation(forwad, up);
+				p1.SetRotation(quaternion);
+				
+				if (i == p1Max)
 				{
-					Quaternion desiredRotation = Quaternion.FromToRotation(Vector3.up, direction);
-					p1.SetRotation(desiredRotation);
+					p2.SetRotation(p1.Rotation);	
 				}
 			}
 		}
@@ -355,5 +389,9 @@ namespace UnityChain
 		private int iterations = 1;
 		private ChainError m_error;
 		private Transform m_transformCache;
+
+		public Vector3 m_prePosition;
+		public Vector3 m_movement;
+		public Vector3 clampVelocity = new Vector3(0.0001f, 0.0001f, 0.0001f);
 	}
 }

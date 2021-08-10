@@ -23,12 +23,20 @@ namespace UnityChain.FrameDebugger
                 return;
             }
 
-            ChainSnapshotData chainSnapshotData = UnityChainFrameDebuggerWindowGUIContext.GetFocusChainSnapshotData();
+            FrameDebuggerTimelineData timelineData = UnityChainFrameDebuggerWindowGUIContext.GetTimelineData();
+            if (null == timelineData)
+            {
+                return;
+            }
+
+            ChainSnapshotData chainSnapshotData = timelineData.snapshotData;
             if (null == chainSnapshotData)
             {
                 return;
             }
 
+            DrawDebug(ref rect, chainSnapshotData);
+            
             bool focusChain = UnityChainFrameDebuggerWindowGUIContext.chainLocalID == -1;
 
             if (focusChain)
@@ -39,6 +47,13 @@ namespace UnityChain.FrameDebugger
             {
                 ParticleGUI(rect, chainSnapshotData);
             }
+        }
+
+        private void DrawDebug(ref Rect rect, ChainSnapshotData chainSnapshotData)
+        {
+            Rect labelRect = new Rect(rect.x, rect.y, rect.width, 20);
+            GUI.Label(labelRect, string.Format("UID:{0}", chainSnapshotData.uid));
+            rect.y += 20;
         }
 
         private void ChainGUI(Rect rect, ChainSnapshotData chainSnapshotData)

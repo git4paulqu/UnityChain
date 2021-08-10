@@ -71,7 +71,8 @@ namespace UnityChain.FrameDebugger
                 DrawAllFixedUpdate(fixedUpdateRect, chainTimelineData, timelineData);
             }
 
-            ApplySnapshotData(timelineData.snapshotData);
+            FrameDebuggerTimelineData focusData = chainTimelineData.GetData(UnityChainFrameDebuggerWindowGUIContext.timelineUID);
+            ApplySnapshotData(focusData.snapshotData);
         }
 
         public void Update()
